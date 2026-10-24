@@ -1,0 +1,6 @@
+{
+  "name": "SISTEM INFORMASI PEMBAYARAN SPP SIT INSAN HARAPAN",
+  "description": "Sistem Informasi Administrasi Pembayaran SPP Bulanan SIT Insan Harapan Batam (RAIT, SDIT, SMPIT) – Yayasan Harapan Ibu Kepri.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

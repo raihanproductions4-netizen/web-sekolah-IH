@@ -1,0 +1,166 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Pengguna aplikasi administrasi SPP (Admin atau Bendahara)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "nama": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["admin", "bendahara"] },
+        "roleName": { "type": "string" },
+        "unitAkses": { "type": "string", "enum": ["all", "rait", "sdit", "smpit"] },
+        "status": { "type": "string", "enum": ["aktif", "nonaktif"] },
+        "avatar": { "type": "string" },
+        "telepon": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["email", "nama", "role", "unitAkses", "status"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Data siswa / santri SIT Insan Harapan",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nis": { "type": "string", "maxLength": 30 },
+        "nisn": { "type": "string", "maxLength": 30 },
+        "namaLengkap": { "type": "string", "maxLength": 120 },
+        "jenisKelamin": { "type": "string", "enum": ["Laki-laki", "Perempuan"] },
+        "unit": { "type": "string", "enum": ["rait", "sdit", "smpit"] },
+        "kelas": { "type": "string", "maxLength": 20 },
+        "tahunAjaran": { "type": "string", "maxLength": 20 },
+        "namaOrangTua": { "type": "string", "maxLength": 100 },
+        "noWhatsapp": { "type": "string", "maxLength": 30 },
+        "tarifSPP": { "type": "number" },
+        "potonganSPP": { "type": "number" },
+        "beasiswaId": { "type": "string" },
+        "namaBeasiswa": { "type": "string" },
+        "tanggalMasuk": { "type": "string" },
+        "status": { "type": "string", "enum": ["aktif", "pindah", "lulus", "nonaktif"] },
+        "catatan": { "type": "string", "maxLength": 500 },
+        "alamat": { "type": "string", "maxLength": 300 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["nis", "namaLengkap", "jenisKelamin", "unit", "kelas", "status"]
+    },
+    "Class": {
+      "title": "Class",
+      "description": "Master data rombongan belajar / kelas",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "namaKelas": { "type": "string", "maxLength": 30 },
+        "unit": { "type": "string", "enum": ["rait", "sdit", "smpit"] },
+        "tahunAjaran": { "type": "string" },
+        "waliKelas": { "type": "string", "maxLength": 100 },
+        "kapasitas": { "type": "number" }
+      },
+      "required": ["namaKelas", "unit", "tahunAjaran"]
+    },
+    "Bill": {
+      "title": "Bill",
+      "description": "Tagihan SPP bulanan siswa",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nomorTagihan": { "type": "string", "maxLength": 50 },
+        "siswaId": { "type": "string" },
+        "namaSiswa": { "type": "string", "maxLength": 120 },
+        "nis": { "type": "string", "maxLength": 30 },
+        "unit": { "type": "string", "enum": ["rait", "sdit", "smpit"] },
+        "kelas": { "type": "string", "maxLength": 20 },
+        "bulan": { "type": "number" },
+        "namaBulan": { "type": "string" },
+        "tahunAjaran": { "type": "string" },
+        "nominalAsli": { "type": "number" },
+        "potongan": { "type": "number" },
+        "totalTagihan": { "type": "number" },
+        "terbayar": { "type": "number" },
+        "sisaTagihan": { "type": "number" },
+        "status": { "type": "string", "enum": ["belum_bayar", "sebagian", "lunas", "bebas", "terlambat"] },
+        "jatuhTempo": { "type": "string" },
+        "tanggalDibuat": { "type": "string" }
+      },
+      "required": ["nomorTagihan", "siswaId", "bulan", "tahunAjaran", "totalTagihan", "status"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Riwayat transaksi pembayaran SPP dan kuitansi",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nomorTransaksi": { "type": "string", "maxLength": 60 },
+        "nomorKuitansi": { "type": "string", "maxLength": 60 },
+        "siswaId": { "type": "string" },
+        "namaSiswa": { "type": "string", "maxLength": 120 },
+        "nis": { "type": "string", "maxLength": 30 },
+        "unit": { "type": "string", "enum": ["rait", "sdit", "smpit"] },
+        "kelas": { "type": "string", "maxLength": 20 },
+        "tanggalBayar": { "type": "string" },
+        "tagihanIds": { "type": "array" },
+        "alokasi": { "type": "array" },
+        "totalBayar": { "type": "number" },
+        "metodePembayaran": { "type": "string" },
+        "nomorReferensi": { "type": "string" },
+        "petugas": { "type": "string" },
+        "petugasId": { "type": "string" },
+        "catatan": { "type": "string" },
+        "status": { "type": "string", "enum": ["sukses", "dibatalkan"] }
+      },
+      "required": ["nomorTransaksi", "nomorKuitansi", "siswaId", "totalBayar", "metodePembayaran", "status"]
+    },
+    "SchoolSettings": {
+      "title": "SchoolSettings",
+      "description": "Pengaturan profil sekolah/pesantren, logo, nominal SPP default, dan tahun ajaran",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "namaYayasan": { "type": "string" },
+        "namaSekolah": { "type": "string" },
+        "tagline": { "type": "string" },
+        "alamatYayasan": { "type": "string" },
+        "kontakYayasan": { "type": "string" },
+        "emailYayasan": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "tahunAjaranAktif": { "type": "string" },
+        "semesterAktif": { "type": "string", "enum": ["Ganjil", "Genap"] },
+        "jatuhTempoTanggal": { "type": "number" },
+        "tarifDefault": { "type": "object" },
+        "daftarKelas": { "type": "array" },
+        "daftarTahunAjaran": { "type": "array" },
+        "rekeningResmi": { "type": "array" }
+      },
+      "required": ["namaYayasan", "namaSekolah", "tahunAjaranAktif"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Koleksi akun pengguna (Admin dan Bendahara)"
+    },
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Koleksi data siswa SIT Insan Harapan"
+    },
+    "/classes/{classId}": {
+      "schema": "Class",
+      "description": "Koleksi kelas / rombel"
+    },
+    "/bills/{billId}": {
+      "schema": "Bill",
+      "description": "Koleksi tagihan SPP bulanan siswa"
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Koleksi riwayat transaksi pembayaran kasir & kuitansi"
+    },
+    "/school_settings/{settingId}": {
+      "schema": "SchoolSettings",
+      "description": "Koleksi profil sekolah dan pengaturan sistem"
+    }
+  }
+}
